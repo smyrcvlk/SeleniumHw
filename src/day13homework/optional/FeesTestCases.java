@@ -1,4 +1,4 @@
-package day13homework.suite;
+package day13homework.optional;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -6,33 +6,45 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Parameters;
+import org.testng.annotations.Test;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class FeesTestCases {
-    public static void main(String[] args) throws InterruptedException {
+    private WebDriver driver;
+    private WebDriverWait wait;
+
+    @Parameters({"username", "password"})
+    @BeforeClass
+    public void setup(String username, String password) {
         System.setProperty("webdriver.chrome.driver", "/Users/sumeyracivelek/Selenium/ChromeDriver/chromedriver");
-        WebDriver driver = new ChromeDriver();
+        driver = new ChromeDriver();
         driver.get("https://test-basqar.mersys.io");
         driver.manage().window().maximize();
-        WebDriverWait wait = new WebDriverWait(driver, 5);
-        driver.findElement(By.cssSelector("[formcontrolname=\"username\"]")).sendKeys("admin");
-        driver.findElement(By.cssSelector("[formcontrolname=\"password\"]")).sendKeys("admin");
+        driver.findElement(By.cssSelector("[formcontrolname=\"username\"]")).sendKeys(username);
+        driver.findElement(By.cssSelector("[formcontrolname=\"password\"]")).sendKeys(password);
         driver.findElement(By.cssSelector("button[aria-label=\"LOGIN\"]")).click();
 
+        wait = new WebDriverWait(driver, 5);
         driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
-        driver.findElement(By.xpath("//*[@class='cc-btn cc-dismiss']")).click();
 
+
+        driver.findElement(By.xpath("//*[@class='cc-btn cc-dismiss']")).click();
 
         driver.findElement(By.xpath("//span[contains(text(),'Setup')]")).click();
 
         driver.findElement(By.xpath("//span[contains(text(),'Parameters')]")).click();
 
-        //click on fees
-
         driver.findElement(By.xpath("//span[contains(text(),'Fees')]")).click();
         //click on plus button
+    }
+    @Test
+    public void main () {
 
         driver.findElement(By.xpath("//*[@class='mat-mini-fab mat-button-base mat-accent']")).click();
 
@@ -56,9 +68,9 @@ public class FeesTestCases {
 
         try {
             wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[aria-label='Fee Type successfully created']")));
-            System.out.println("Creation success!");
+
         } catch (Exception e) {
-            System.out.println("Creation failure!");
+            Assert.fail( "Creation failure", e );
 
 
         }
@@ -67,9 +79,9 @@ public class FeesTestCases {
 
         try {
             wait.until(ExpectedConditions.numberOfElementsToBe(By.cssSelector("tbody > tr "), 6));
-            System.out.println("Success!");
+
         } catch (Exception e) {
-            System.out.println("Failure!");
+            Assert.fail( "Update failure", e );
         }
 
         driver.findElement(By.cssSelector("tbody > tr:last-child ms-edit-button")).click();
@@ -84,16 +96,16 @@ public class FeesTestCases {
         integrationcodeedit.sendKeys("3");
 
         WebElement priorityedit = driver.findElement(By.cssSelector("mat-dialog-container [placeholder='GENERAL.FIELD.PRIORITY']  > input"));
-        priorityedit.sendKeys("17");
+        priorityedit.sendKeys("19");
 
         WebElement saveIcon2 = driver.findElement(By.cssSelector("mat-dialog-container [data-icon=\"save\"]"));
         saveIcon2.click();
 
         try {
             wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[aria-label='Fee Type successfully updated']")));
-            System.out.println("Creation success!");
+
         } catch (Exception e) {
-            System.out.println("Creation failure!");
+            Assert.fail( "Update failure", e );
 
         }
         driver.findElement( By.cssSelector( "tbody > tr:last-child ms-delete-button" ) ).click();
@@ -105,13 +117,16 @@ public class FeesTestCases {
 
         try {
             wait.until( ExpectedConditions.visibilityOfElementLocated( By.cssSelector( "[aria-label='Fee Type successfully deleted']" ) ) );
-            System.out.println("Deleted success!");
+
         } catch( Exception e) {
-            System.out.println("Deleted failure!");
+            Assert.fail( "Delete failure", e );
         }
 
-
-
-
     }
+    @AfterClass
+    public void quit(){
+        driver.quit();
+    }
+
+
 }
