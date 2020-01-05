@@ -1,0 +1,41 @@
+Answer the following questions using your own words. Do not copy paste! )
+
+Define Selenium:
+Selenium is a tool and library that enable and support the automation of web browsers.
+
+Selenium WebDriver
+Selenium IDE
+Selenium Grid
+Selenium RC <- deprecated
+What is the difference between Webdriver and RC?
+
+Rc is deprecated
+
+Why should Selenium be selected as a test tool?
+
+Because   is Free.
+Wide range of supported languages, platforms, and browsers
+Huge community
+Dominating in Market share
+Integrated with Agile, DevOps, Continuous Delivery workflow
+Supports mobile, using Appium
+supports distributed testing
+Are there any Cons of using Selenium?
+Steep learning curve
+No tech support
+Not an All-in-One solution
+No reporting capabilities
+It doesn't support Desktop Applications/Windows bases applications.
+What are the limitations of Selenium?
+Selenium doesn’t support desktop-based applications
+Reading bar code is not possible using Selenium WebDriver.
+Automating OTP submission is not possible.
+No built-in image comparison
+It is not creative and won't explore corner cases. An automated test can only do what it is told.
+
+
+What do we mean by Selenium 1 and Selenium 2?
+
+Selenium RC and WebDriver, in a combination, are popularly known as Selenium 2. Selenium RC alone is also referred to as Selenium 1.
+
+

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Form</title>
+    <!--
+        give your div some styles, like background color, width and center it in the middle of the screen
+        give your form inputs some styles, like font, margins and color of text
+    -->
+    <style>
+    h1 {
+        color: blue;
+    }
+    body{
+        background-color:white;
+        text-align: center;
+
+    }
+
+<!--    img{-->
+<!--       width: 250px;-->
+<!--       height:50px;-->
+    }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<!--
+   Create a form with:
+    * 1 text input called "username"
+    * 2 password inputs, called "password" and "password repeat"
+    * 1 text area called "address"
+    * 2 radio buttons with values "male" and "female" and called "sex"
+    * 1 dropdown with selections: free, basic, enterprise. Call this dropdown "plan"
+    * 1 checkbox with name "agreement" and with text "I agree to terms and conditions"
+    * 1 submit image button that uses "submit.png"
+   Put your form inside a div
+-->
+<div>
+
+<h1 style="color: red">SignUpForm</h1>
+
+<hr>
+<form action="/someUrl" method="GET">
+    <p>Username: <br> <input type="text"  name="text"/></p>
+    <p>Password:  <br> <input type="password" name="password"/></p>
+    <p>Password repeat: <br> <input type="password" name="password repeat"/></p>
+    <p>Adress: <br> <textarea name="textarea"> </textarea></p>
+    <p>
+       sex <br>
+     <p>male<br>   <input type="radio"  name="radio"/></p>
+     <p>female <br>  <input type="radio" name="radio"/></p>
+
+    </p>
+    <p>
+        Plan <br>
+        <select name="select">
+            <option value="opt1">Free</option>
+            -->
+            <option value="opt2">Basic</option>
+            -->
+            <option value="opt3">Enterprise</option>
+            -->
+        </select>
+    </p>
+    <p>
+        Agreement<br>
+    <p>I agree to terms and conditions<br>   <input type="checkbox" name="checkbox"></p>
+    </p>
+<!--    <input type="submit" value="Submit button" id="submit"/>-->
+<!--    <img src="submit.png" alt="submit image" ></form>-->
+
+
+    <input type="image" src=submit.png width="150" height="35" name="submit" alt="Submit" />
+
+
+</form>
+</div>
+</body>
+</html>
