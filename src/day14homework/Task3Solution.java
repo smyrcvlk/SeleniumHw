@@ -24,22 +24,27 @@ public class Task3Solution {
         driver.get("https://www.seleniumeasy.com/test/bootstrap-alert-messages-demo.html");
     }
     @AfterClass
-    public void quit(){
+    public void quit() {
         driver.quit();
     }
 
     @Test
-    public void click() {
+    public void clickButton(){
         driver.findElement( By.id( "normal-btn-success" ) ).click();
-        WebElement message = driver.findElement( By.cssSelector( ".alert-normal-success" ) );
-        WebElement button = driver.findElement( By.cssSelector( ".alert-normal-success > button" ) );
-        String text = message.getText().replace( button.getText(), "" ).trim();
-        String test = "I'm a normal success message. To close use the appropriate button.";
-        Assert.assertEquals(test,text);
-        //System.out.println( test.equals( text ) ? "Success!" : "Failure!" );
-        button.click();
-        Assert.assertTrue(!message.isDisplayed());
-        //System.out.println( !message.isDisplayed() ? "Success!" : "Failure" );
+        String text = driver.findElement( By.className( "alert-normal-success" ) ).getText();
+        String buttonText = driver.findElement( By.cssSelector( ".alert-normal-success > button" ) ).getText();
+        String textWithoutButton = text.replaceAll( buttonText, "" );
+        String textWithoutButtonAndExtraSpace = textWithoutButton.trim();
+        Assert.assertEquals( textWithoutButtonAndExtraSpace, "I'm a normal success message. To close use the appropriate button." );
+    }
 
+    @Test
+    public void hideTheMessage(){
+        driver.findElement( By.id( "normal-btn-success" ) ).click();
+
+        driver.findElement( By.cssSelector( ".alert-normal-success > button" ) ).click();
+        WebElement message = driver.findElement( By.className( "alert-normal-success" ) );
+
+        Assert.assertFalse( message.isDisplayed() );
     }
 }

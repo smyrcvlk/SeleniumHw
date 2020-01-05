@@ -5,6 +5,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -21,19 +23,20 @@ public class Task4Solution {
         driver = new ChromeDriver();
         driver.get("https://www.seleniumeasy.com/test/bootstrap-alert-messages-demo.html");
      }
-     @Test
-     public void click() {
-         driver.findElement(By.id("autoclosable-btn-success")).click();
-         WebDriverWait wait = new WebDriverWait(driver, 5);
-
-         try {
-             wait.until(ExpectedConditions.invisibilityOfElementLocated(By.className("alert-autocloseable-success")));
-             System.out.println("Success!");
-         } catch (Exception e) {
-             System.out.println("Failure!");
-         }
-     }
-     public void  quit(){
+    @AfterClass
+    public void quit() {
         driver.quit();
-     }
+    }
+
+    @Test
+    public void test(){
+        driver.findElement( By.id( "autoclosable-btn-success" ) ).click();
+        WebDriverWait wait = new WebDriverWait( driver, 4 );
+        try {
+            wait.until( ExpectedConditions.invisibilityOfElementLocated( By.className( "alert-autocloseable-success" ) ) );
+        } catch(Exception e) {
+            Assert.fail( "The element did not disappear in 4 seconds", e );
+        }
+
+    }
 }
