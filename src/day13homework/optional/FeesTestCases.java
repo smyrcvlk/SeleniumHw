@@ -51,8 +51,8 @@ public class FeesTestCases {
         //Type the name of the city
 
         List<WebElement> name = driver.findElements(By.xpath("//*[@class='mat-form-field-infix']//child::input"));
-        String smsn = "smsn";
-        name.get(3).sendKeys("smsn");
+        String smsn = "smsnn";
+        name.get(3).sendKeys("smsnn");
 
         List<WebElement> code = driver.findElements(By.xpath("//*[@class='mat-form-field-infix']//child::input"));
         code.get(4).sendKeys("alacam");
@@ -75,14 +75,14 @@ public class FeesTestCases {
 
         }
         wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector("[aria-label='Fee Type successfully created']")));
+
+//        try {
+//            wait.until(ExpectedConditions.numberOfElementsToBe(By.cssSelector("tbody > tr "), 6));
+//
+//        } catch (Exception e) {
+//            Assert.fail( "Update failure", e );
+//        }
         driver.findElement(By.className("mat-paginator-navigation-next")).click();
-
-        try {
-            wait.until(ExpectedConditions.numberOfElementsToBe(By.cssSelector("tbody > tr "), 6));
-
-        } catch (Exception e) {
-            Assert.fail( "Update failure", e );
-        }
 
         driver.findElement(By.cssSelector("tbody > tr:last-child ms-edit-button")).click();
 
@@ -108,12 +108,12 @@ public class FeesTestCases {
             Assert.fail( "Update failure", e );
 
         }
+
+        wait.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//*[text()='" + "smsnn" + "1" + "']" ) ) );
+
         driver.findElement( By.cssSelector( "tbody > tr:last-child ms-delete-button" ) ).click();
 
-
-
         driver.findElement( By.cssSelector( "mat-dialog-container button[type=\"submit\"]" ) ).click();
-
 
         try {
             wait.until( ExpectedConditions.visibilityOfElementLocated( By.cssSelector( "[aria-label='Fee Type successfully deleted']" ) ) );
